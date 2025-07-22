@@ -66,9 +66,9 @@ task.spawn(function()
     Instance.new("UIStroke", close).Color = DARK_BROWN
     close.MouseButton1Click:Connect(function() gui:Destroy() end)
 
-    -- Message
+    -- Main message
     local message = Instance.new("TextLabel", frame)
-    message.Size = UDim2.new(0.94, 0, 0.6, 0)
+    message.Size = UDim2.new(0.94, 0, 0.55, 0)
     message.Position = UDim2.new(0.03, 0, 0.12, 0)
     message.BackgroundTransparency = 1
     message.Font = FONT
@@ -87,10 +87,10 @@ To fix this:
 
 ZeoHub recommends KRNL for best results.]]
 
-    -- Copy KRNL button
+    -- KRNL button
     local copyBtn = Instance.new("TextButton", frame)
-    copyBtn.Size = UDim2.new(0.6, 0, 0.12, 0)
-    copyBtn.Position = UDim2.new(0.2, 0, 0.74, 0)
+    copyBtn.Size = UDim2.new(0.9, 0, 0.11, 0)
+    copyBtn.Position = UDim2.new(0.05, 0, 0.7, 0)
     copyBtn.BackgroundColor3 = BLUE
     copyBtn.Font = FONT
     copyBtn.Text = "🔗 Copy KRNL Link"
@@ -108,15 +108,24 @@ ZeoHub recommends KRNL for best results.]]
         end
     end)
 
-    -- Website link
-    local zeoLink = Instance.new("TextLabel", frame)
-    zeoLink.Size = UDim2.new(0.94, 0, 0.1, 0)
-    zeoLink.Position = UDim2.new(0.03, 0, 0.88, 0)
-    zeoLink.BackgroundTransparency = 1
-    zeoLink.Font = FONT
-    zeoLink.Text = "🌐 All versions of Grow a Garden scripts here:\nhttps://zeohubweb.vercel.app/"
-    zeoLink.TextColor3 = Color3.fromRGB(230, 255, 230)
-    zeoLink.TextScaled = true
-    zeoLink.TextWrapped = true
-    zeoLink.TextStrokeTransparency = 0.5
+    -- Website copy button
+    local siteBtn = Instance.new("TextButton", frame)
+    siteBtn.Size = UDim2.new(0.9, 0, 0.11, 0)
+    siteBtn.Position = UDim2.new(0.05, 0, 0.83, 0)
+    siteBtn.BackgroundColor3 = ACCENT_GREEN
+    siteBtn.Font = FONT
+    siteBtn.Text = "🌐 Copy ZeoHub Website"
+    siteBtn.TextColor3 = Color3.new(1, 1, 1)
+    siteBtn.TextScaled = true
+    Instance.new("UICorner", siteBtn).CornerRadius = UDim.new(0, 8)
+    Instance.new("UIStroke", siteBtn).Color = DARK_BROWN
+
+    siteBtn.MouseButton1Click:Connect(function()
+        if setclipboard then
+            setclipboard("https://zeohubweb.vercel.app/")
+            siteBtn.Text = "✅ Link Copied"
+            task.wait(2)
+            siteBtn.Text = "🌐 Copy ZeoHub Website"
+        end
+    end)
 end)
