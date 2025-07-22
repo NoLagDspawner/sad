@@ -15,8 +15,8 @@ task.spawn(function()
     gui.Parent = game:GetService("CoreGui")
 
     local frame = Instance.new("Frame", gui)
-    frame.Size = UDim2.new(0.3, 0, 0.3, 0)
-    frame.Position = UDim2.new(0.35, 0, 0.35, 0)
+    frame.Size = UDim2.new(0.3, 0, 0.32, 0)
+    frame.Position = UDim2.new(0.35, 0, 0.34, 0)
     frame.BackgroundColor3 = BROWN
     frame.Active = true
     frame.Draggable = true
@@ -30,46 +30,41 @@ task.spawn(function()
     texture.ScaleType = Enum.ScaleType.Tile
     texture.TileSize = UDim2.new(0, 96, 0, 96)
 
-    -- Top bar
-    local topBar = Instance.new("Frame", frame)
-    topBar.Size = UDim2.new(1, 0, 0, 0.1)
-    topBar.BackgroundColor3 = ACCENT_GREEN
-    Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 16)
-    topBar.ClipsDescendants = true
+    -- Red Alert Banner
+    local alertBar = Instance.new("Frame", frame)
+    alertBar.Size = UDim2.new(1, 0, 0, 30)
+    alertBar.BackgroundColor3 = RED
+    Instance.new("UICorner", alertBar).CornerRadius = UDim.new(0, 10)
+    alertBar.ClipsDescendants = true
 
-    local greenTexture = Instance.new("ImageLabel", topBar)
-    greenTexture.Size = UDim2.new(1, 0, 1, 0)
-    greenTexture.BackgroundTransparency = 1
-    greenTexture.Image = TILE_IMAGE
-    greenTexture.ScaleType = Enum.ScaleType.Tile
-    greenTexture.TileSize = UDim2.new(0, 96, 0, 96)
+    local alertText = Instance.new("TextLabel", alertBar)
+    alertText.Size = UDim2.new(1, -10, 1, 0)
+    alertText.Position = UDim2.new(0, 5, 0, 0)
+    alertText.BackgroundTransparency = 1
+    alertText.Font = FONT
+    alertText.Text = "Delta Executor Detected."
+    alertText.TextColor3 = Color3.new(1, 1, 1)
+    alertText.TextScaled = true
+    alertText.TextXAlignment = Enum.TextXAlignment.Center
+    alertText.TextStrokeTransparency = 0.3
 
-    local title = Instance.new("TextLabel", topBar)
-    title.Size = UDim2.new(0.92, 0, 1, 0)
-    title.Position = UDim2.new(0.03, 0, 0, 0)
-    title.BackgroundTransparency = 1
-    title.Font = FONT
-    title.Text = "Error Message"
-    title.TextColor3 = Color3.new(1, 1, 1)
-    title.TextScaled = true
-    title.TextXAlignment = Enum.TextXAlignment.Left
-
-    local close = Instance.new("TextButton", topBar)
-    close.Size = UDim2.new(0.06, 0, 0.8, 0)
-    close.Position = UDim2.new(0.92, 0, 0.1, 0)
-    close.BackgroundColor3 = RED
+    -- Close button
+    local close = Instance.new("TextButton", alertBar)
+    close.Size = UDim2.new(0, 20, 0, 20)
+    close.Position = UDim2.new(1, -26, 0.5, -10)
+    close.BackgroundColor3 = DARK_BROWN
     close.Font = FONT
     close.Text = "X"
     close.TextColor3 = Color3.new(1, 1, 1)
     close.TextScaled = true
     Instance.new("UICorner", close).CornerRadius = UDim.new(0, 6)
-    Instance.new("UIStroke", close).Color = DARK_BROWN
+    Instance.new("UIStroke", close).Color = Color3.new(0, 0, 0)
     close.MouseButton1Click:Connect(function() gui:Destroy() end)
 
-    -- Main message
+    -- Message content
     local message = Instance.new("TextLabel", frame)
-    message.Size = UDim2.new(0.94, 0, 0.55, 0)
-    message.Position = UDim2.new(0.03, 0, 0.12, 0)
+    message.Size = UDim2.new(0.94, 0, 0.5, 0)
+    message.Position = UDim2.new(0.03, 0, 0, 40)
     message.BackgroundTransparency = 1
     message.Font = FONT
     message.TextColor3 = Color3.new(1, 1, 1)
@@ -77,9 +72,7 @@ task.spawn(function()
     message.TextScaled = true
     message.TextWrapped = true
     message.TextYAlignment = Enum.TextYAlignment.Top
-    message.Text = [[Delta Executor detected.
-
-This executor blocked the script because it's incompatible.
+    message.Text = [[This executor blocked the script because it's incompatible.
 
 To fix this:
 • Turn OFF Delta's 'Anti-Scam' setting
@@ -90,7 +83,7 @@ ZeoHub recommends KRNL for best results.]]
     -- KRNL button
     local copyBtn = Instance.new("TextButton", frame)
     copyBtn.Size = UDim2.new(0.9, 0, 0.11, 0)
-    copyBtn.Position = UDim2.new(0.05, 0, 0.7, 0)
+    copyBtn.Position = UDim2.new(0.05, 0, 0.72, 0)
     copyBtn.BackgroundColor3 = BLUE
     copyBtn.Font = FONT
     copyBtn.Text = "🔗 Copy KRNL Link"
@@ -108,13 +101,13 @@ ZeoHub recommends KRNL for best results.]]
         end
     end)
 
-    -- Website copy button
+    -- Website button
     local siteBtn = Instance.new("TextButton", frame)
     siteBtn.Size = UDim2.new(0.9, 0, 0.11, 0)
-    siteBtn.Position = UDim2.new(0.05, 0, 0.83, 0)
+    siteBtn.Position = UDim2.new(0.05, 0, 0.86, 0)
     siteBtn.BackgroundColor3 = ACCENT_GREEN
     siteBtn.Font = FONT
-    siteBtn.Text = "🌐 Copy ZeoHub Website"
+    siteBtn.Text = "🌐 All GAG Scripts - ZeoHub"
     siteBtn.TextColor3 = Color3.new(1, 1, 1)
     siteBtn.TextScaled = true
     Instance.new("UICorner", siteBtn).CornerRadius = UDim.new(0, 8)
@@ -123,9 +116,9 @@ ZeoHub recommends KRNL for best results.]]
     siteBtn.MouseButton1Click:Connect(function()
         if setclipboard then
             setclipboard("https://zeohubweb.vercel.app/")
-            siteBtn.Text = "✅ Link Copied"
+            siteBtn.Text = "✅ Copied Website"
             task.wait(2)
-            siteBtn.Text = "🌐 Copy ZeoHub Website"
+            siteBtn.Text = "🌐 All GAG Scripts - ZeoHub"
         end
     end)
 end)
