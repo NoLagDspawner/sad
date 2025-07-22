@@ -1,81 +1,81 @@
-local TILE_IMAGE = "rbxassetid://15910695828"
-local FONT = Enum.Font.FredokaOne
+task.spawn(function()
+    local TILE_IMAGE = "rbxassetid://15910695828"
+    local FONT = Enum.Font.FredokaOne
 
-local ACCENT_GREEN = Color3.fromRGB(110, 196, 99)
-local BROWN = Color3.fromRGB(118, 61, 25)
-local DARK_BROWN = Color3.fromRGB(51, 25, 0)
-local RED = Color3.fromRGB(255, 62, 62)
-local BLUE = Color3.fromRGB(30, 144, 255)
+    local ACCENT_GREEN = Color3.fromRGB(110, 196, 99)
+    local BROWN = Color3.fromRGB(118, 61, 25)
+    local DARK_BROWN = Color3.fromRGB(51, 25, 0)
+    local RED = Color3.fromRGB(255, 62, 62)
+    local BLUE = Color3.fromRGB(30, 144, 255)
 
-local gui = Instance.new("ScreenGui", game.CoreGui)
-gui.Name = "DeltaWarnUI"
-gui.IgnoreGuiInset = true
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "DeltaWarnUI"
+    gui.IgnoreGuiInset = true
+    gui.ResetOnSpawn = false
+    gui.Parent = game:GetService("CoreGui")
 
-local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 340, 0, 250)
-frame.Position = UDim2.new(0.5, -170, 0.5, -125)
-frame.BackgroundColor3 = BROWN
-frame.Active = true
-frame.Draggable = true
-Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 10)
-Instance.new("UIStroke", frame).Color = DARK_BROWN
+    local frame = Instance.new("Frame", gui)
+    frame.Size = UDim2.new(0, 340, 0, 250)
+    frame.Position = UDim2.new(0.5, -170, 0.5, -125)
+    frame.BackgroundColor3 = BROWN
+    frame.Active = true
+    frame.Draggable = true
+    Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 10)
+    Instance.new("UIStroke", frame).Color = DARK_BROWN
 
-local texture = Instance.new("ImageLabel", frame)
-texture.Size = UDim2.new(1, 0, 1, 0)
-texture.BackgroundTransparency = 1
-texture.Image = TILE_IMAGE
-texture.ScaleType = Enum.ScaleType.Tile
-texture.TileSize = UDim2.new(0, 96, 0, 96)
+    local texture = Instance.new("ImageLabel", frame)
+    texture.Size = UDim2.new(1, 0, 1, 0)
+    texture.BackgroundTransparency = 1
+    texture.Image = TILE_IMAGE
+    texture.ScaleType = Enum.ScaleType.Tile
+    texture.TileSize = UDim2.new(0, 96, 0, 96)
 
--- Top bar
-local topBar = Instance.new("Frame", frame)
-topBar.Size = UDim2.new(1, 0, 0, 30)
-topBar.BackgroundColor3 = ACCENT_GREEN
-Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 10)
-topBar.ClipsDescendants = true
+    local topBar = Instance.new("Frame", frame)
+    topBar.Size = UDim2.new(1, 0, 0, 30)
+    topBar.BackgroundColor3 = ACCENT_GREEN
+    Instance.new("UICorner", topBar).CornerRadius = UDim.new(0, 10)
+    topBar.ClipsDescendants = true
 
-local greenTexture = Instance.new("ImageLabel", topBar)
-greenTexture.Size = UDim2.new(1, 0, 1, 0)
-greenTexture.BackgroundTransparency = 1
-greenTexture.Image = TILE_IMAGE
-greenTexture.ScaleType = Enum.ScaleType.Tile
-greenTexture.TileSize = UDim2.new(0, 96, 0, 96)
+    local greenTexture = Instance.new("ImageLabel", topBar)
+    greenTexture.Size = UDim2.new(1, 0, 1, 0)
+    greenTexture.BackgroundTransparency = 1
+    greenTexture.Image = TILE_IMAGE
+    greenTexture.ScaleType = Enum.ScaleType.Tile
+    greenTexture.TileSize = UDim2.new(0, 96, 0, 96)
 
-local title = Instance.new("TextLabel", topBar)
-title.Size = UDim2.new(1, -28, 1, 0)
-title.Position = UDim2.new(0, 10, 0, 0)
-title.BackgroundTransparency = 1
-title.Font = FONT
-title.Text = "Error Message"
-title.TextColor3 = Color3.new(1, 1, 1)
-title.TextScaled = true
-title.TextXAlignment = Enum.TextXAlignment.Left
+    local title = Instance.new("TextLabel", topBar)
+    title.Size = UDim2.new(1, -28, 1, 0)
+    title.Position = UDim2.new(0, 10, 0, 0)
+    title.BackgroundTransparency = 1
+    title.Font = FONT
+    title.Text = "Error Message"
+    title.TextColor3 = Color3.new(1, 1, 1)
+    title.TextScaled = true
+    title.TextXAlignment = Enum.TextXAlignment.Left
 
--- Close button
-local close = Instance.new("TextButton", topBar)
-close.Size = UDim2.new(0, 20, 0, 20)
-close.Position = UDim2.new(1, -24, 0.5, -10)
-close.BackgroundColor3 = RED
-close.Font = FONT
-close.Text = "X"
-close.TextColor3 = Color3.new(1, 1, 1)
-close.TextScaled = true
-Instance.new("UICorner", close).CornerRadius = UDim.new(0, 6)
-Instance.new("UIStroke", close).Color = DARK_BROWN
-close.MouseButton1Click:Connect(function() gui:Destroy() end)
+    local close = Instance.new("TextButton", topBar)
+    close.Size = UDim2.new(0, 20, 0, 20)
+    close.Position = UDim2.new(1, -24, 0.5, -10)
+    close.BackgroundColor3 = RED
+    close.Font = FONT
+    close.Text = "X"
+    close.TextColor3 = Color3.new(1, 1, 1)
+    close.TextScaled = true
+    Instance.new("UICorner", close).CornerRadius = UDim.new(0, 6)
+    Instance.new("UIStroke", close).Color = DARK_BROWN
+    close.MouseButton1Click:Connect(function() gui:Destroy() end)
 
--- Main message
-local message = Instance.new("TextLabel", frame)
-message.Size = UDim2.new(1, -20, 0, 148)
-message.Position = UDim2.new(0, 10, 0, 38)
-message.BackgroundTransparency = 1
-message.Font = FONT
-message.TextColor3 = Color3.new(1, 1, 1)
-message.TextStrokeTransparency = 0.4
-message.TextScaled = true
-message.TextWrapped = true
-message.TextYAlignment = Enum.TextYAlignment.Top
-message.Text = [[Delta Executor detected.
+    local message = Instance.new("TextLabel", frame)
+    message.Size = UDim2.new(1, -20, 0, 148)
+    message.Position = UDim2.new(0, 10, 0, 38)
+    message.BackgroundTransparency = 1
+    message.Font = FONT
+    message.TextColor3 = Color3.new(1, 1, 1)
+    message.TextStrokeTransparency = 0.4
+    message.TextScaled = true
+    message.TextWrapped = true
+    message.TextYAlignment = Enum.TextYAlignment.Top
+    message.Text = [[Delta Executor detected.
 
 If you're seeing this message, it means your executor blocked this script because the executor doesn't support the script.
 
@@ -85,35 +85,34 @@ To fix this:
 
 ZeoHub recommends KRNL for best results.]]
 
--- Website Label
-local zeoLink = Instance.new("TextLabel", frame)
-zeoLink.Size = UDim2.new(1, -20, 0, 24)
-zeoLink.Position = UDim2.new(0, 10, 1, -66)
-zeoLink.BackgroundTransparency = 1
-zeoLink.Font = FONT
-zeoLink.Text = "🌐 All versions of Grow A Garden scripts:\nhttps://zeohubweb.vercel.app/"
-zeoLink.TextColor3 = Color3.fromRGB(230, 255, 230)
-zeoLink.TextScaled = true
-zeoLink.TextWrapped = true
-zeoLink.TextStrokeTransparency = 0.5
+    local zeoLink = Instance.new("TextLabel", frame)
+    zeoLink.Size = UDim2.new(1, -20, 0, 24)
+    zeoLink.Position = UDim2.new(0, 10, 1, -66)
+    zeoLink.BackgroundTransparency = 1
+    zeoLink.Font = FONT
+    zeoLink.Text = "🌐 All versions of Grow A Garden scripts:\nhttps://zeohubweb.vercel.app/"
+    zeoLink.TextColor3 = Color3.fromRGB(230, 255, 230)
+    zeoLink.TextScaled = true
+    zeoLink.TextWrapped = true
+    zeoLink.TextStrokeTransparency = 0.5
 
--- Copy button
-local copyBtn = Instance.new("TextButton", frame)
-copyBtn.Size = UDim2.new(0.9, 0, 0, 28)
-copyBtn.Position = UDim2.new(0.05, 0, 1, -34)
-copyBtn.BackgroundColor3 = BLUE
-copyBtn.Font = FONT
-copyBtn.Text = "🔗 Copy KRNL Link"
-copyBtn.TextColor3 = Color3.new(1, 1, 1)
-copyBtn.TextScaled = true
-Instance.new("UICorner", copyBtn).CornerRadius = UDim.new(0, 7)
-Instance.new("UIStroke", copyBtn).Color = DARK_BROWN
+    local copyBtn = Instance.new("TextButton", frame)
+    copyBtn.Size = UDim2.new(0.9, 0, 0, 28)
+    copyBtn.Position = UDim2.new(0.05, 0, 1, -34)
+    copyBtn.BackgroundColor3 = BLUE
+    copyBtn.Font = FONT
+    copyBtn.Text = "🔗 Copy KRNL Link"
+    copyBtn.TextColor3 = Color3.new(1, 1, 1)
+    copyBtn.TextScaled = true
+    Instance.new("UICorner", copyBtn).CornerRadius = UDim.new(0, 7)
+    Instance.new("UIStroke", copyBtn).Color = DARK_BROWN
 
-copyBtn.MouseButton1Click:Connect(function()
-    if setclipboard then
-        setclipboard("https://krnl.place/")
-        copyBtn.Text = "✅ Link Copied"
-        task.wait(2)
-        copyBtn.Text = "🔗 Copy KRNL Link"
-    end
+    copyBtn.MouseButton1Click:Connect(function()
+        if setclipboard then
+            setclipboard("https://krnl.place/")
+            copyBtn.Text = "✅ Link Copied"
+            task.wait(2)
+            copyBtn.Text = "🔗 Copy KRNL Link"
+        end
+    end)
 end)
